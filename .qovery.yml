@@ -1,0 +1,11 @@
+---
+application:
+  name: "grrm-not-a-blog-discord-update"
+  project: "Discord Bots"
+  organization: "QoveryCommunity"
+routers:
+- name: "main-grrm-not-a-blog-discord-update"
+  routes:
+  - application_name: "grrm-not-a-blog-discord-update"
+    paths:
+    - "/*"
