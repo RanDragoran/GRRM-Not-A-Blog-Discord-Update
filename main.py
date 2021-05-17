@@ -14,6 +14,9 @@ async def getLatestGrrmBlog():
   botId = client.get_channel(int(os.environ['CHANNELID']))
 
   while not client.is_closed():
+    with open('latest.txt', 'r') as file:
+      latestDate = file.read()
+
     source = requests.get('https://georgerrmartin.com/notablog/').text
     soup = BeautifulSoup(source, 'lxml')
     post = soup.find('div', class_='post-main')
@@ -25,8 +28,11 @@ async def getLatestGrrmBlog():
       textMessage = '>>> ' + '**Not A Blog Just Updated**\nTitle: ' + postTitle +'\nDate: ' + postDate +'\nlink: '+ postUrl
       await botId.send(textMessage)
 
-    latestDate = postDate
     print(latestDate)
+
+    with open('latest.txt', 'w') as file:
+      file.write(postDate)
+
     await asyncio.sleep(60 * 10)
 
   
